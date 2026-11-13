@@ -1,0 +1,909 @@
+@import './styles/tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--bg-void);
+  color: var(--text-bone);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle stone grain & warm top candlelight vignette */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% -8%, rgba(229, 154, 56, 0.09), transparent 70%),
+    radial-gradient(circle at 85% 90%, rgba(111, 179, 138, 0.04), transparent 55%);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Layout Shell */
+.crypt-shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+  flex: 1;
+}
+
+/* Header */
+.crypt-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-crypt);
+  border: 1px solid var(--border-iron);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-crypt);
+  margin-bottom: 28px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-emblem {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-amber);
+  display: grid;
+  place-items: center;
+  color: var(--amber-flame);
+  flex-shrink: 0;
+}
+
+.brand-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-bone);
+}
+
+.brand-subtitle {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-stone);
+  letter-spacing: 0.02em;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-inset);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron);
+}
+
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-stone);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s var(--ease-ritual);
+}
+
+.nav-tab:hover {
+  color: var(--text-bone);
+  background: rgba(239, 230, 213, 0.04);
+}
+
+.nav-tab.is-active {
+  background: var(--bg-stone);
+  color: var(--amber-glow);
+  border-color: var(--border-amber);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spark-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-inset);
+  border: 1px solid var(--border-iron);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--amber-glow);
+}
+
+/* Shared Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-amber);
+  background: var(--amber-flame);
+  color: #14110b;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 0.16s var(--ease-ritual), background-color 0.16s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--amber-glow);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron-strong);
+  background: var(--bg-stone);
+  color: var(--text-bone);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.18s var(--ease-ritual);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-stone-hover);
+  border-color: var(--amber-flame);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-stone);
+  font-size: 0.82rem;
+  transition: all 0.16s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--text-bone);
+  background: rgba(239, 230, 213, 0.06);
+}
+
+.btn-danger-ghost:hover {
+  color: var(--wax-crimson);
+  background: var(--wax-dim);
+}
+
+/* Section Intro & Toolbar */
+.view-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.view-heading {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-bone);
+}
+
+.view-lead {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-stone);
+  max-width: 620px;
+}
+
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border-iron);
+  background: var(--bg-crypt);
+  color: var(--text-stone);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.16s ease;
+}
+
+.filter-btn:hover {
+  color: var(--text-bone);
+  border-color: var(--border-iron-strong);
+}
+
+.filter-btn.is-active {
+  background: var(--amber-dim);
+  border-color: var(--border-amber);
+  color: var(--amber-glow);
+}
+
+.search-box {
+  position: relative;
+  min-width: 240px;
+  flex: 1;
+  max-width: 340px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-ash);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron);
+  background: var(--bg-crypt);
+  font-size: 0.875rem;
+  color: var(--text-bone);
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.search-input:focus {
+  border-color: var(--amber-flame);
+}
+
+/* Graveyard Grid & Tombstone Cards */
+.graveyard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.tombstone-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1d2027 0%, #15171c 100%);
+  border: 1px solid var(--border-iron);
+  border-radius: var(--radius-arch);
+  padding: 26px 22px 18px;
+  box-shadow: var(--shadow-crypt);
+  transition: transform 0.22s var(--ease-ritual), border-color 0.22s ease;
+}
+
+.tombstone-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-iron-strong);
+}
+
+.tombstone-card.status-resurrected {
+  border-color: var(--border-amber);
+  box-shadow: var(--shadow-crypt), var(--shadow-candle);
+}
+
+.tombstone-card.status-ascended {
+  border-color: var(--border-sage);
+}
+
+.tombstone-crest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-tag.dormant {
+  background: rgba(167, 159, 144, 0.1);
+  color: var(--text-stone);
+  border: 1px solid var(--border-iron);
+}
+
+.status-tag.resurrected {
+  background: var(--amber-dim);
+  color: var(--amber-glow);
+  border: 1px solid var(--border-amber);
+}
+
+.status-tag.ascended {
+  background: var(--sage-dim);
+  color: var(--sage-spectral);
+  border: 1px solid var(--border-sage);
+}
+
+.buried-date {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-ash);
+}
+
+.tombstone-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-bone);
+}
+
+.tombstone-epitaph {
+  margin: 0 0 14px;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-stone);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.cause-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--wax-dim);
+  border: 1px solid rgba(201, 82, 77, 0.35);
+  color: #e6928e;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.stack-chip {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-iron);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-stone);
+}
+
+.tombstone-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  margin-bottom: 12px;
+  border-top: 1px solid var(--border-iron);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-stone);
+}
+
+.tombstone-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Ritual Chamber Layout */
+.ritual-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .ritual-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-card {
+  background: var(--bg-crypt);
+  border: 1px solid var(--border-iron);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-crypt);
+}
+
+.chamber-dial-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dial-svg-box {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  margin: 10px 0 18px;
+  display: grid;
+  place-items: center;
+}
+
+.dial-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.dial-track {
+  fill: none;
+  stroke: rgba(239, 230, 213, 0.08);
+  stroke-width: 8;
+}
+
+.dial-progress {
+  fill: none;
+  stroke: var(--amber-flame);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s linear;
+}
+
+.dial-progress.is-complete {
+  stroke: var(--sage-spectral);
+}
+
+.dial-readout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dial-clock {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-bone);
+}
+
+.dial-state-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--amber-glow);
+  margin-top: 2px;
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.preset-btn {
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-iron);
+  background: var(--bg-inset);
+  color: var(--text-stone);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  transition: all 0.16s ease;
+}
+
+.preset-btn:hover:not(:disabled) {
+  color: var(--text-bone);
+  border-color: var(--border-iron-strong);
+}
+
+.preset-btn.is-active {
+  background: var(--amber-dim);
+  border-color: var(--border-amber);
+  color: var(--amber-glow);
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.audio-divider {
+  width: 100%;
+  border-top: 1px solid var(--border-iron);
+  padding-top: 16px;
+}
+
+.audio-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-stone);
+  margin-bottom: 10px;
+}
+
+.sound-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sound-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-iron);
+  background: var(--bg-inset);
+  color: var(--text-stone);
+  font-size: 0.78rem;
+  transition: all 0.16s ease;
+}
+
+.sound-btn.is-active {
+  background: var(--sage-dim);
+  border-color: var(--border-sage);
+  color: var(--sage-spectral);
+}
+
+/* Task Checklist Column */
+.project-selector-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.crypt-select {
+  flex: 1;
+  min-width: 210px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron-strong);
+  background: var(--bg-inset);
+  color: var(--text-bone);
+  font-size: 0.9rem;
+}
+
+.add-task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.crypt-input {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron);
+  background: var(--bg-inset);
+  color: var(--text-bone);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.crypt-input:focus {
+  border-color: var(--amber-flame);
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-inset);
+  border: 1px solid var(--border-iron);
+}
+
+.task-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.88rem;
+  color: var(--text-bone);
+}
+
+.task-item.is-done .task-toggle {
+  color: var(--text-ash);
+  text-decoration: line-through;
+}
+
+.ritual-banner {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--sage-dim);
+  border: 1px solid var(--border-sage);
+  color: var(--sage-spectral);
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Necronomicon Analytics */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-tile {
+  background: var(--bg-crypt);
+  border: 1px solid var(--border-iron);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+}
+
+.metric-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-stone);
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--amber-glow);
+}
+
+.necronomicon-split {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 820px) {
+  .necronomicon-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cause-bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.cause-bar-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.cause-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-inset);
+  overflow: hidden;
+}
+
+.cause-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--wax-crimson), var(--amber-flame));
+}
+
+.backup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.feedback-note {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--sage-spectral);
+}
+
+.feedback-error {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: #e6928e;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 8, 10, 0.78);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 40;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-crypt);
+  border: 1px solid var(--border-amber);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-crypt);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-stone);
+}
+
+.crypt-textarea {
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-iron);
+  background: var(--bg-inset);
+  color: var(--text-bone);
+  font-size: 0.88rem;
+  resize: vertical;
+  min-height: 74px;
+  outline: none;
+}
+
+.crypt-textarea:focus {
+  border-color: var(--amber-flame);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.empty-state {
+  padding: 36px 20px;
+  text-align: center;
+  border: 1px dashed var(--border-iron-strong);
+  border-radius: var(--radius-lg);
+  color: var(--text-stone);
+}
+
+.crypt-footer {
+  text-align: center;
+  padding: 18px 20px;
+  border-top: 1px solid var(--border-iron);
+  font-size: 0.8rem;
+  color: var(--text-ash);
+}

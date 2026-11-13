@@ -1,0 +1,46 @@
+:root {
+  /* Obsidian & Slate Surfaces */
+  --bg-void: #0d0e11;
+  --bg-crypt: #14161b;
+  --bg-stone: #1b1e25;
+  --bg-stone-hover: #21252e;
+  --bg-inset: #101216;
+
+  /* Bone Parchment Typography */
+  --text-bone: #efe6d5;
+  --text-stone: #a79f90;
+  --text-ash: #706a5e;
+
+  /* Candlelight & Ritual Accents */
+  --amber-flame: #e59a38;
+  --amber-glow: #f3c173;
+  --amber-dim: rgba(229, 154, 56, 0.14);
+  --sage-spectral: #6fb38a;
+  --sage-dim: rgba(111, 179, 138, 0.14);
+  --wax-crimson: #c9524d;
+  --wax-dim: rgba(201, 82, 77, 0.15);
+
+  /* Etched Iron Borders */
+  --border-iron: rgba(239, 230, 213, 0.11);
+  --border-iron-strong: rgba(239, 230, 213, 0.22);
+  --border-amber: rgba(229, 154, 56, 0.42);
+  --border-sage: rgba(111, 179, 138, 0.42);
+
+  /* Typography */
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing & Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-arch: 48px 48px 12px 12px;
+
+  /* Shadows */
+  --shadow-crypt: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-candle: 0 10px 30px rgba(229, 154, 56, 0.12);
+
+  /* Transitions */
+  --ease-ritual: cubic-bezier(0.22, 1, 0.36, 1);
+}

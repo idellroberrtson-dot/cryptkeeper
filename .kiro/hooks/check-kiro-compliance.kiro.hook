@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Verify Build & Kiro Directory Integrity",
+  "description": "Ensures TypeScript compilation, production bundle build, and .kiro tracking remain valid.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run `npm run build` and verify that `.kiro/` is not ignored in `.gitignore` and `LICENSE` exists at the repository root."
+  }
+}
